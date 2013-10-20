@@ -7,7 +7,7 @@ package mercadinho.Dados;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import mercadinho.CamandaBanco;
+import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Fornecedor;
 import mercadinho.ClassesBasicas.FornecedorExeception;
 
@@ -17,7 +17,7 @@ import mercadinho.ClassesBasicas.FornecedorExeception;
  */
 public class DadosFornecedor {
 
-    private CamandaBanco banco = new CamandaBanco();
+    private CamadaBanco banco = new CamadaBanco();
 
     public void cadastrarFornecedor(Fornecedor f) throws FornecedorExeception {
 

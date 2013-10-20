@@ -5,8 +5,11 @@
  */
 package mercadinho.Dados;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import mercadinho.CamandaBanco;
+import java.util.ArrayList;
+import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Funcionario;
 import mercadinho.ClassesBasicas.FuncionarioException;
 
@@ -14,22 +17,87 @@ import mercadinho.ClassesBasicas.FuncionarioException;
  *
  * @author NeGo
  */
-public class DadosFuncionario {
+public class DadosFuncionario extends CamadaBanco {
 
-    private CamandaBanco banco = new CamandaBanco();
+    private Statement callBd;
+    private String sqlQuery;
+    private ResultSet getResult;
 
-    public void cadastrar(Funcionario s) throws FuncionarioException {
-
+    public void cadastrarFuncionario(Funcionario func) throws FuncionarioException {
         try {
-
-            Statement conex = banco.conectar();
-            String sql = "insert into Funcionario values";
-            sql += "('" + s.getMatricula() + "','" + s.getNome() + "','" + s.getCpf() + "','" + s.getRG() + "','" + s.getEndfun().getBairro() + "'";
-            sql += ",'" + s.getEndfun().getCep() + "', '" + s.getEndfun().getCidade() + "', '" + s.getEndfun().getLogradouro() + "'";
-            conex.execute(sql);
-
-        } catch (Exception ex) {
+            callBd = conectar();
+            sqlQuery = "INSERT INTO Funcionarios VALUES"
+                    +"('" + func.getMatricula() + "','" + func.getNome() + "','" + func.getCpf() + "','" + func.getRG() + "','" + func.getEndfun().getBairro() + "'"
+             + ",'" + func.getEndfun().getCep() + "', '" + func.getEndfun().getCidade() + "', '" + func.getEndfun().getLogradouro() + "'";
+            callBd.execute(sqlQuery);
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new FuncionarioException(ex.getMessage());
+        }
+    }
+    
+    public void removerCliente(String matricula) throws FuncionarioException {
+        try {
+            this.callBd = conectar();
+            sqlQuery = "DELETE FROM funcionarios WHERE matricula = " + matricula + " ;";
+            callBd.execute(sqlQuery);
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FuncionarioException(ex.getMessage());
+        } finally {
+            try {
+                desconectar();
+            } catch (SQLException ex) {
+                throw new FuncionarioException(ex.getMessage());
+            }
+        }
+    }
+    
+    public void alterarCliente(Funcionario cli) throws FuncionarioException {
+        try {
+            callBd = conectar();
+            sqlQuery = "UPDATE funcionarios SET nome = '" + cli.getNome() + "', rg = '" + cli.getRG() + "', bairro = '" + cli.getEndfun().getBairro() + "', "
+                    + "cep = '" + cli.getEndfun().getCep() + "', cidade = '" + cli.getEndfun().getCidade() + "',"
+                    + "logradouro = '" + cli.getEndfun().getLogradouro() + "', numero = '" + cli.getEndfun().getNumero() + "', cpf = '" + cli.getCpf() + "'"
+                    + "WHERE matricula = "+cli.getMatricula()+" ;";
+
+           
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FuncionarioException(ex.getMessage());
+        } finally {
+            try {
+                desconectar();
+            } catch (SQLException ex) {
+                throw new FuncionarioException(ex.getMessage());
+            }
+        }
+    }
+    
+    public ArrayList<Funcionario> Listar(String filtro) throws FuncionarioException {
+        try {
+            ArrayList<Funcionario> listagem = new ArrayList<>();
+            if (filtro.equals("")) {
+                sqlQuery = "SELECT * FROM funcionarios;";
+            } else {
+                sqlQuery = "SELECT * FROM funcionarios WHERE nome = '%" + filtro + "%';";
+            }
+
+            callBd = conectar();
+            getResult = callBd.executeQuery(sqlQuery);
+            while (getResult.next()) {
+                Funcionario fun = new Funcionario();
+                fun.setMatricula(getResult.getInt("matricula"));
+                fun.setNome(getResult.getString("nome"));
+                fun.setCpf(getResult.getString("cpf"));
+                fun.setRG(getResult.getString("rg"));
+                fun.getEndfun().setBairro(getResult.getString("bairro"));
+                fun.getEndfun().setCep(getResult.getString("cep"));
+                fun.getEndfun().setCidade(getResult.getString("cidade"));
+                fun.getEndfun().setLogradouro(getResult.getString("logradouro"));
+                fun.getEndfun().setNumero(getResult.getString("numero"));
+                listagem.add(fun);
+            }
+            return listagem;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new FuncionarioException(e.getMessage());
         }
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mercadinho;
+package mercadinho.ClassesBasicas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author NeGo
  */
-public class CamandaBanco {
+public class CamadaBanco {
     public Statement stmt;
     public Connection conn;
     

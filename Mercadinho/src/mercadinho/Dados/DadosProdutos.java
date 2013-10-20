@@ -7,7 +7,7 @@ package mercadinho.Dados;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import mercadinho.CamandaBanco;
+import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Produtos;
 import mercadinho.ClassesBasicas.ProdutosException;
 
@@ -17,7 +17,7 @@ import mercadinho.ClassesBasicas.ProdutosException;
  */
 public class DadosProdutos {
     
-     private CamandaBanco banco = new CamandaBanco();
+     private CamadaBanco banco = new CamadaBanco();
     
      public void cadastrarProduto (Produtos p) throws ProdutosException {
 
