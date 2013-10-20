@@ -77,7 +77,7 @@ public class DadosFuncionario extends CamadaBanco {
             if (filtro.equals("")) {
                 sqlQuery = "SELECT * FROM funcionarios;";
             } else {
-                sqlQuery = "SELECT * FROM funcionarios WHERE nome = '%" + filtro + "%';";
+                sqlQuery = "SELECT * FROM funcionarios WHERE nome LIKE '%" + filtro + "%';";
             }
 
             callBd = conectar();

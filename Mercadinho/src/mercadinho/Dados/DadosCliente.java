@@ -84,7 +84,7 @@ public class DadosCliente extends CamadaBanco {
             if (filtro.equals("")) {
                 sqlQuery = "SELECT * FROM clientes;";
             } else {
-                sqlQuery = "SELECT * FROM clientes WHERE nome = '%" + filtro + "%';";
+                sqlQuery = "SELECT * FROM clientes WHERE nome LIKE '%" + filtro + "%';";
             }
 
             callBd = conectar();
