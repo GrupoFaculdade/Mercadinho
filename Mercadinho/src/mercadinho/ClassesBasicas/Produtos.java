@@ -10,36 +10,36 @@ package mercadinho.ClassesBasicas;
  * @author NeGo
  */
 public class Produtos {
-   private String CodigoProduto;
-   private String NomeProduto;
+   private String codigoProduto;
+   private String nomeProduto;
    private SetorProdutos sector;
 
     /**
      * @return the CodigoProduto
      */
     public String getCodigoProduto() {
-        return CodigoProduto;
+        return codigoProduto;
     }
 
     /**
      * @param CodigoProduto the CodigoProduto to set
      */
     public void setCodigoProduto(String CodigoProduto) {
-        this.CodigoProduto = CodigoProduto;
+        this.codigoProduto = CodigoProduto;
     }
 
     /**
      * @return the NomeProduto
      */
     public String getNomeProduto() {
-        return NomeProduto;
+        return nomeProduto;
     }
 
     /**
      * @param NomeProduto the NomeProduto to set
      */
     public void setNomeProduto(String NomeProduto) {
-        this.NomeProduto = NomeProduto;
+        this.nomeProduto = NomeProduto;
     }
     
 }
