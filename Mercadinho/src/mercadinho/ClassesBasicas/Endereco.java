@@ -11,10 +11,10 @@ package mercadinho.ClassesBasicas;
  */
 public class Endereco {
     
-    private String Bairro;
-    private String Cidade;
-    private String Numero;
-    private String Logradouro;
+    private String bairro;
+    private String cidade;
+    private String numero;
+    private String logradouro;
     private String cep;
 
 
@@ -22,56 +22,56 @@ public class Endereco {
      * @return the Bairro
      */
     public String getBairro() {
-        return Bairro;
+        return bairro;
     }
 
     /**
      * @param Bairro the Bairro to set
      */
     public void setBairro(String Bairro) {
-        this.Bairro = Bairro;
+        this.bairro = Bairro;
     }
 
     /**
      * @return the Cidade
      */
     public String getCidade() {
-        return Cidade;
+        return cidade;
     }
 
     /**
      * @param Cidade the Cidade to set
      */
     public void setCidade(String Cidade) {
-        this.Cidade = Cidade;
+        this.cidade = Cidade;
     }
 
     /**
      * @return the Numero
      */
     public String getNumero() {
-        return Numero;
+        return numero;
     }
 
     /**
      * @param Numero the Numero to set
      */
     public void setNumero(String Numero) {
-        this.Numero = Numero;
+        this.numero = Numero;
     }
 
     /**
      * @return the Logradouro
      */
     public String getLogradouro() {
-        return Logradouro;
+        return logradouro;
     }
 
     /**
      * @param Logradouro the Logradouro to set
      */
     public void setLogradouro(String Logradouro) {
-        this.Logradouro = Logradouro;
+        this.logradouro = Logradouro;
     }
 
     /**

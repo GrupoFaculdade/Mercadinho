@@ -15,15 +15,14 @@ import mercadinho.ClassesBasicas.FornecedorExeception;
  *
  * @author NeGo
  */
-public class DadosFornecedor {
+public class DadosFornecedor extends CamadaBanco {
 
-    private CamadaBanco banco = new CamadaBanco();
 
     public void cadastrarFornecedor(Fornecedor f) throws FornecedorExeception {
 
         try {
-            Statement conex = banco.conectar();
-            String sql = "insert into Cliente values";
+            Statement conex = conectar();
+            String sql = "INSERT INTO fornecedores VALUES";
             sql += "('" + f.getCodigoFornecedor() + "','" + f.getNome() + "')";
             conex.executeQuery(sql);
 
@@ -32,7 +31,7 @@ public class DadosFornecedor {
             throw new FornecedorExeception(ex.getMessage());
         } finally {
             try {
-                banco.desconectar();
+                desconectar();
             } catch (SQLException ex) {
                 throw new FornecedorExeception(ex.getMessage());
             }

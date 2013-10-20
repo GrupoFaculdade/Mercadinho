@@ -11,35 +11,35 @@ package mercadinho.ClassesBasicas;
  */
 public class Fornecedor {
     
-    private String Nome;
-    private String CodigoFornecedor;
+    private String nome;
+    private String codigoFornecedor;
 
     /**
      * @return the Nome
      */
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     /**
      * @param Nome the Nome to set
      */
     public void setNome(String Nome) {
-        this.Nome = Nome;
+        this.nome = Nome;
     }
 
     /**
      * @return the CodigoFornecedor
      */
     public String getCodigoFornecedor() {
-        return CodigoFornecedor;
+        return codigoFornecedor;
     }
 
     /**
      * @param CodigoFornecedor the CodigoFornecedor to set
      */
     public void setCodigoFornecedor(String CodigoFornecedor) {
-        this.CodigoFornecedor = CodigoFornecedor;
+        this.codigoFornecedor = CodigoFornecedor;
     }
     
     

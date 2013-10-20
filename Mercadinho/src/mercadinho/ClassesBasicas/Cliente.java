@@ -11,51 +11,51 @@ package mercadinho.ClassesBasicas;
  */
 public class Cliente {
     
-    private String Nome;
-    private String Cpf;
-    private String RG;
+    private String nome;
+    private String cpf;
+    private String rg;
     private Endereco endcli;
 
     /**
      * @return the Nome
      */
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     /**
      * @param Nome the Nome to set
      */
     public void setNome(String Nome) {
-        this.Nome = Nome;
+        this.nome = Nome;
     }
 
     /**
      * @return the Cpf
      */
     public String getCpf() {
-        return Cpf;
+        return cpf;
     }
 
     /**
      * @param Cpf the Cpf to set
      */
     public void setCpf(String Cpf) {
-        this.Cpf = Cpf;
+        this.cpf = Cpf;
     }
 
     /**
      * @return the RG
      */
     public String getRG() {
-        return RG;
+        return rg;
     }
 
     /**
      * @param RG the RG to set
      */
     public void setRG(String RG) {
-        this.RG = RG;
+        this.rg = RG;
     }
 
     /**

@@ -11,7 +11,7 @@ package mercadinho.ClassesBasicas;
  */
 public class Funcionario {
     
-    private int Matricula;
+    private int matricula;
     private String cpf;
     private String RG;
     private String nome;
@@ -21,14 +21,14 @@ public class Funcionario {
      * @return the Matricula
      */
     public int getMatricula() {
-        return Matricula;
+        return matricula;
     }
 
     /**
      * @param Matricula the Matricula to set
      */
     public void setMatricula(int Matricula) {
-        this.Matricula = Matricula;
+        this.matricula = Matricula;
     }
 
     /**

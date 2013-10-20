@@ -11,35 +11,35 @@ package mercadinho.ClassesBasicas;
  */
 public class SetorProdutos {
     
-    private String Nome;
-    private String CodigoSetor;
+    private String nome;
+    private String codigoSetor;
 
     /**
      * @return the Nome
      */
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     /**
      * @param Nome the Nome to set
      */
     public void setNome(String Nome) {
-        this.Nome = Nome;
+        this.nome = Nome;
     }
 
     /**
      * @return the CodigoSetor
      */
     public String getCodigoSetor() {
-        return CodigoSetor;
+        return codigoSetor;
     }
 
     /**
      * @param CodigoSetor the CodigoSetor to set
      */
     public void setCodigoSetor(String CodigoSetor) {
-        this.CodigoSetor = CodigoSetor;
+        this.codigoSetor = CodigoSetor;
     }
     
 }

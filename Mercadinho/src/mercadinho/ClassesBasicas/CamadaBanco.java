@@ -19,13 +19,13 @@ public class CamadaBanco {
     public Connection conn;
     
     public Statement conectar() throws ClassNotFoundException,SQLException{
-        return this.CconectarPostGreSql();
+        return this.conectarPostGreSql();
     }
      public void desconectar() throws SQLException {
         conn.close();
      }
 
-    private Statement CconectarPostGreSql() throws ClassNotFoundException,SQLException {
+    private Statement conectarPostGreSql() throws ClassNotFoundException,SQLException {
         
         Class.forName("org.postgresql.Driver");
         String local = "localhost";
