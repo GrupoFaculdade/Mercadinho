@@ -5,6 +5,7 @@
  */
 package mercadinho.Dados;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import mercadinho.ClassesBasicas.CamadaBanco;
@@ -15,29 +16,69 @@ import mercadinho.ClassesBasicas.ProdutosException;
  *
  * @author NeGo
  */
-public class DadosProdutos {
+public class DadosProdutos extends CamadaBanco {
     
-     private CamadaBanco banco = new CamadaBanco();
+    private Statement callBd;
+    private String sqlQuery;
+    private ResultSet getResult;
     
      public void cadastrarProduto (Produtos p) throws ProdutosException {
 
         try {
             
-            Statement conex = banco.conectar();
-            String sql = "INSERT INTO Produtos VALUES";
-            sql += "('"+p.getCodigoProduto()+"', '"+p.getNomeProduto()+"')";
-            conex.execute(sql);
+            callBd = conectar();
+            
+            sqlQuery = "INSERT INTO Produtos VALUES";
+            sqlQuery += "('"+p.getCodigoProduto()+"', '"+p.getNomeProduto()+"')";
+           callBd.execute(sqlQuery);
 
-        } catch (Exception ex) {
+        } catch(ClassNotFoundException | SQLException ex) {
             throw new ProdutosException(ex.getMessage());
         }finally{
             try {
-                banco.desconectar();
-            } catch (SQLException ex) {
+                 desconectar();
+               } catch (SQLException ex) {
                 throw new ProdutosException(ex.getMessage());
             }
         }
-    }
+    }   
+     public void removerProduto(Produtos p) throws ProdutosException {
+         
+         try{
+              callBd = conectar();
+              sqlQuery ="DELETE FROM Produtos where codigoProduto = "+p.getCodigoProduto()+",";
+              callBd.executeQuery(sqlQuery);
+             
+         }catch(ClassNotFoundException | SQLException ex){
+             throw new ProdutosException(ex.getMessage());
+         }finally{
+             try{
+                 desconectar();
+             }catch(SQLException ex){
+                 
+                 throw new ProdutosException(ex.getMessage());
+             }
+         }
+        
+         
+     }
+     public void alterarProduto( Produtos p) throws ProdutosException{
+         try{
+             callBd = conectar();
+             sqlQuery="UPDATE Produtos set nome = '"+ p.getCodigoProduto()+"', nomeProduto = '"+p.getNomeProduto()+"'";
+         }catch(ClassNotFoundException | SQLException ex){
+             throw new ProdutosException(ex.getMessage());
+             
+         }finally{
+             try{
+                 desconectar();
+             }catch(SQLException ex){
+                 
+                 throw new ProdutosException(ex.getMessage());
+             }
+         }
+         
+     }
 }
     
     
