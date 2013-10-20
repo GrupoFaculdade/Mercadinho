@@ -9,9 +9,9 @@ package mercadinho.ClassesBasicas;
  *
  * @author NeGo
  */
-public class FornecedorExeception extends Exception{
+public class FornecedorException extends Exception{
     
-    public FornecedorExeception(String mensagem){
+    public FornecedorException(String mensagem){
         super(mensagem);
     }
     
