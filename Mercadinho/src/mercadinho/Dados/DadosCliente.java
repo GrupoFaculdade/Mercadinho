@@ -78,7 +78,7 @@ public class DadosCliente extends CamadaBanco {
         }
     }
 
-    public ArrayList<Cliente> Listar(String filtro) throws ClienteException {
+    public ArrayList<Cliente> listarCliente(String filtro) throws ClienteException {
         try {
             ArrayList<Cliente> listagem = new ArrayList<>();
             if (filtro.equals("")) {
@@ -107,4 +107,8 @@ public class DadosCliente extends CamadaBanco {
         }
     }
 
+    public static void checkTableCliente(){
+        
+    }
+    
 }

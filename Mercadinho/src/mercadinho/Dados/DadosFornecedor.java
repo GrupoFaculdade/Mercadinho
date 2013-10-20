@@ -44,7 +44,7 @@ public class DadosFornecedor extends CamadaBanco {
 
     }
     
-     public void removerCliente(String codForn) throws FornecedorException {
+     public void removerFornecedor(String codForn) throws FornecedorException {
         try {
             this.callBd = conectar();
             sqlQuery = "DELETE FROM fornecedores WHERE codFornecedor = " + codForn + ";";
@@ -76,7 +76,7 @@ public class DadosFornecedor extends CamadaBanco {
         }
     }
     
-    public ArrayList<Fornecedor> Listar(String filtro) throws FornecedorException {
+    public ArrayList<Fornecedor> listarFornecedor(String filtro) throws FornecedorException {
         try {
             ArrayList<Fornecedor> listagem = new ArrayList<>();
             if (filtro.equals("")) {

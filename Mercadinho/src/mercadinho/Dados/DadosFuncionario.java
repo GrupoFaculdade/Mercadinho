@@ -71,7 +71,7 @@ public class DadosFuncionario extends CamadaBanco {
         }
     }
     
-    public ArrayList<Funcionario> Listar(String filtro) throws FuncionarioException {
+    public ArrayList<Funcionario> listarFuncionario(String filtro) throws FuncionarioException {
         try {
             ArrayList<Funcionario> listagem = new ArrayList<>();
             if (filtro.equals("")) {
