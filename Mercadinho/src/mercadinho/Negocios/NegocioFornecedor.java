@@ -6,43 +6,49 @@
 
 package mercadinho.Negocios;
 
+import java.util.ArrayList;
 import mercadinho.ClassesBasicas.Fornecedor;
+import mercadinho.ClassesBasicas.BdException;
 import mercadinho.ClassesBasicas.FornecedorException;
 import mercadinho.Dados.DadosFornecedor;
+import mercadinho.Dados.InterfaceFornecedor;
 
 /**
  *
  * @author Douglas
  */
-public class NegocioFornecedor {
+public class NegocioFornecedor implements InterfaceFornecedor {
     DadosFornecedor dados;
     
     public NegocioFornecedor(){
         dados = new DadosFornecedor();
     }
     
-    public void cadastrarFornecedor(Fornecedor forn) throws FornecedorException {
+    @Override
+    public void cadastrarFornecedor(Fornecedor forn) throws BdException, FornecedorException {
         //Validações:
         
         //-----
         dados.cadastrarFornecedor(forn);
     }
-    public void removerFornecedor(String codFornecedor) throws FornecedorException {
+    public void removerFornecedor(String codFornecedor) throws BdException, FornecedorException {
         //Validações:
         
         //-----
         dados.removerFornecedor(codFornecedor);
     }
-    public void alterarFornecedor(Fornecedor forn) throws FornecedorException {
+    @Override
+    public void alterarFornecedor(Fornecedor forn) throws BdException, FornecedorException {
        //Validações:
         
         //----- 
         dados.alterarFornecedor(forn);
     }
-    public void listarFornecedor(String filtro) throws FornecedorException {
+    @Override
+    public ArrayList<Fornecedor> listarFornecedor(String filtro) throws BdException, FornecedorException {
        //Validações:
         
         //-----
-        dados.listarFornecedor(filtro);
+        return dados.listarFornecedor(filtro);
     }
 }

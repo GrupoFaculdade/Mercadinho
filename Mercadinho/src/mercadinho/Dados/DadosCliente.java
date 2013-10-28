@@ -11,19 +11,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Cliente;
-import mercadinho.ClassesBasicas.ClienteException;
+import mercadinho.ClassesBasicas.BdException;
 
 /**
  *
  * @author NeGo
  */
-public class DadosCliente extends CamadaBanco {
+public class DadosCliente extends CamadaBanco implements InterfaceCliente {
 
     private Statement callBd;
     private String sqlQuery;
     private ResultSet getResult;
 
-    public void cadastrarCliente(Cliente cli) throws ClienteException {
+    @Override
+    public void cadastrarCliente(Cliente cli) throws BdException {
 
         try {
 
@@ -34,33 +35,35 @@ public class DadosCliente extends CamadaBanco {
             callBd.execute(sqlQuery);
 
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new ClienteException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new ClienteException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
 
-    public void removerCliente(String cpf) throws ClienteException {
+    @Override
+    public void removerCliente(String cpf) throws BdException {
         try {
             this.callBd = conectar();
             sqlQuery = "DELETE FROM clientes WHERE cpf = " + cpf + ";";
             callBd.executeQuery(sqlQuery);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new ClienteException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new ClienteException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
 
-    public void alterarCliente(Cliente cli) throws ClienteException {
+    @Override
+    public void alterarCliente(Cliente cli) throws BdException {
         try {
             callBd = conectar();
             sqlQuery = "UPDATE clientes SET nome = '" + cli.getNome() + "', rg = '" + cli.getRG() + "', bairro = '" + cli.getEndcli().getBairro() + "', "
@@ -68,17 +71,18 @@ public class DadosCliente extends CamadaBanco {
                     + "logradouro = '" + cli.getEndcli().getLogradouro() + "', numero = '" + cli.getEndcli().getNumero() + "' WHERE cpf = '" + cli.getCpf() + "'";
 
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new ClienteException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new ClienteException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
 
-    public ArrayList<Cliente> listarCliente(String filtro) throws ClienteException {
+    @Override
+    public ArrayList<Cliente> listarCliente(String filtro) throws BdException {
         try {
             ArrayList<Cliente> listagem = new ArrayList<>();
             if (filtro.equals("")) {
@@ -103,12 +107,33 @@ public class DadosCliente extends CamadaBanco {
             }
             return listagem;
         } catch (ClassNotFoundException | SQLException e) {
-            throw new ClienteException(e.getMessage());
+            throw new BdException(e.getMessage());
         }
     }
 
-    public static void checkTableCliente(){
-        
+    public static void checkTableCliente() throws BdException {
+        try {
+            Statement callBd;
+            String sqlQuery;
+            boolean existe;
+            CamadaBanco banco = new CamadaBanco();
+            sqlQuery = "SELECT name FROM SYSOBJECTS WHERE XTYPE='U' AND name = 'clientes';";
+            callBd = banco.conectar();
+            existe = callBd.execute(sqlQuery);
+            if (existe == false) {
+                sqlQuery = "CREATE TABLE clientes(cpf VARCHAR(11) PRIMARY KEY,\n" +
+"						nome VARCHAR(100) NOT NULL,\n" +
+"						rg VARCHAR(10) NOT NULL,\n" +
+"						bairro VARCHAR(100) NOT NULL,\n" +
+"						cidade VARCHAR(50) NOT NULL,\n" +
+"						 numero VARCHAR(10) NOT NULL,\n" +
+"						 logradouro VARCHAR(100) NOT NULL,\n" +
+"						 cep VARCHAR(100)NOT NULL);";
+                callBd.execute(sqlQuery);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new BdException(e.getMessage());
+
+        }
     }
-    
 }

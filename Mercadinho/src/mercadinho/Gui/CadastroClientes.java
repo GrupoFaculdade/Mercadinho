@@ -40,7 +40,7 @@ public class CadastroClientes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(254, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(242, 242, 242))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

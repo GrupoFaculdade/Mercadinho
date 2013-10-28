@@ -11,19 +11,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Fornecedor;
-import mercadinho.ClassesBasicas.FornecedorException;
+import mercadinho.ClassesBasicas.BdException;
 
 /**
  *
  * @author NeGo
  */
-public class DadosFornecedor extends CamadaBanco {
+public class DadosFornecedor extends CamadaBanco implements InterfaceFornecedor {
 
     private Statement callBd;
     private String sqlQuery;
     private ResultSet getResult;
 
-    public void cadastrarFornecedor(Fornecedor forn) throws FornecedorException {
+    @Override
+    public void cadastrarFornecedor(Fornecedor forn) throws BdException {
 
         try {
             callBd = conectar();
@@ -32,51 +33,53 @@ public class DadosFornecedor extends CamadaBanco {
             callBd.execute(sqlQuery);
 
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FornecedorException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new FornecedorException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
 
         }
 
     }
     
-     public void removerFornecedor(String codForn) throws FornecedorException {
+    @Override
+     public void removerFornecedor(String codForn) throws BdException {
         try {
             this.callBd = conectar();
             sqlQuery = "DELETE FROM fornecedores WHERE codFornecedor = " + codForn + ";";
             callBd.execute(sqlQuery);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FornecedorException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new FornecedorException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
     
-    public void alterarFornecedor(Fornecedor forn) throws FornecedorException {
+    @Override
+    public void alterarFornecedor(Fornecedor forn) throws BdException {
         try {
             callBd = conectar();
             sqlQuery = "UPDATE fornecedores SET nome = '"+forn.getNome()+"' WHERE codFornecedor = "+forn.getCodigoFornecedor()+" ;"; 
 
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FornecedorException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new FornecedorException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
-    
-    public ArrayList<Fornecedor> listarFornecedor(String filtro) throws FornecedorException {
+    @Override
+    public ArrayList<Fornecedor> listarFornecedor(String filtro) throws BdException {
         try {
             ArrayList<Fornecedor> listagem = new ArrayList<>();
             if (filtro.equals("")) {
@@ -95,7 +98,7 @@ public class DadosFornecedor extends CamadaBanco {
             }
             return listagem;
         } catch (ClassNotFoundException | SQLException e) {
-            throw new FornecedorException(e.getMessage());
+            throw new BdException(e.getMessage());
         }
     }
 }

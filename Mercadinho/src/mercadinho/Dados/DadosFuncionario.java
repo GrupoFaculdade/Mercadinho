@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mercadinho.ClassesBasicas.CamadaBanco;
 import mercadinho.ClassesBasicas.Funcionario;
-import mercadinho.ClassesBasicas.FuncionarioException;
+import mercadinho.ClassesBasicas.BdException;
 
 /**
  *
@@ -23,7 +23,7 @@ public class DadosFuncionario extends CamadaBanco {
     private String sqlQuery;
     private ResultSet getResult;
 
-    public void cadastrarFuncionario(Funcionario func) throws FuncionarioException {
+    public void cadastrarFuncionario(Funcionario func) throws BdException {
         try {
             callBd = conectar();
             sqlQuery = "INSERT INTO Funcionarios VALUES"
@@ -31,27 +31,27 @@ public class DadosFuncionario extends CamadaBanco {
              + ",'" + func.getEndfun().getCep() + "', '" + func.getEndfun().getCidade() + "', '" + func.getEndfun().getLogradouro() + "'";
             callBd.execute(sqlQuery);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FuncionarioException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         }
     }
     
-    public void removerCliente(String matricula) throws FuncionarioException {
+    public void removerCliente(String matricula) throws BdException {
         try {
             this.callBd = conectar();
             sqlQuery = "DELETE FROM funcionarios WHERE matricula = " + matricula + " ;";
             callBd.execute(sqlQuery);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FuncionarioException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new FuncionarioException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
     
-    public void alterarCliente(Funcionario cli) throws FuncionarioException {
+    public void alterarCliente(Funcionario cli) throws BdException {
         try {
             callBd = conectar();
             sqlQuery = "UPDATE funcionarios SET nome = '" + cli.getNome() + "', rg = '" + cli.getRG() + "', bairro = '" + cli.getEndfun().getBairro() + "', "
@@ -61,17 +61,17 @@ public class DadosFuncionario extends CamadaBanco {
 
            
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FuncionarioException(ex.getMessage());
+            throw new BdException(ex.getMessage());
         } finally {
             try {
                 desconectar();
             } catch (SQLException ex) {
-                throw new FuncionarioException(ex.getMessage());
+                throw new BdException(ex.getMessage());
             }
         }
     }
     
-    public ArrayList<Funcionario> listarFuncionario(String filtro) throws FuncionarioException {
+    public ArrayList<Funcionario> listarFuncionario(String filtro) throws BdException {
         try {
             ArrayList<Funcionario> listagem = new ArrayList<>();
             if (filtro.equals("")) {
@@ -97,7 +97,7 @@ public class DadosFuncionario extends CamadaBanco {
             }
             return listagem;
         } catch (ClassNotFoundException | SQLException e) {
-            throw new FuncionarioException(e.getMessage());
+            throw new BdException(e.getMessage());
         }
     }
 }
